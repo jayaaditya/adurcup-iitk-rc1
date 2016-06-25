@@ -4,9 +4,12 @@ import os
 import subprocess
 import sys
 from firebase import firebase
+from datetime import datetime
 
+count = 1
 # Create your views here.
 def dash(request):
+	global count
 	COMMAND = 'ndsctl status'
 	ssh = subprocess.Popen(["ssh","root@192.168.1.1",COMMAND],
 		shell=False,
@@ -26,8 +29,12 @@ def dash(request):
 	download = info[2]
 	download_speed = info[5]
 	database_var = database()
-	database_var.put('/general',1,{'connected users':connected_users,'all users':all_users,'download data':download,'upload data':upload,'download speed':download_speed,'upload speed':upload_speed})
-	return render(request,'Dashboard/index1.html')
+	now = datetime.now()
+	result = database_var.put('/general',1,{'connected_users':connected_users,'all_users':all_users,'download_data':download,'upload_data':upload,'download_speed':download_speed,'upload_speed':upload_speed,'datetime':now})
+	result = database_var.put('/usage-history',count,{'connected_users':connected_users,'datetime':now})
+	print count
+	count = count + 1
+	return render(request,'Dashboard/dash_new.html')
 
 def reboot(request):
 	os.system("echo reboot | ssh root@192.168.1.1")
@@ -46,7 +53,7 @@ def deauth(request):
 	return HttpResponse(return_res)
 
 def allusers(request):
-	return render(request,'all.html')
+	return render(request,'all1.html')
 
 def database():
 	database_var = firebase.FirebaseApplication('https://project-9184156655217525389.firebaseio.com/',None)
@@ -57,7 +64,7 @@ def check_state(request):
 	try:
 		ip = request.GET['ip']
 	except KeyError:
-		return HttpResponse("<script>alert('IP not passed');window.location='/dashboard/dash';</script>")
+		return HttpResponse("<script>alert('IP not passed');window.location='/dashboard/users';</script>")
 	COMMAND = 'ndsctl status'
 	ssh = subprocess.Popen(["ssh","root@192.168.1.1",COMMAND],
 		shell=False,
@@ -72,16 +79,16 @@ def check_state(request):
 			index = result.index(a)
 			info = result[index+6].split('\n')
 			state = info[0]
-			req_str = "<script>alert('%s');window.location='/dashboard/dash';</script>" %state
+			req_str = "<script>alert('%s');window.location='/dashboard/users';</script>" %state
 			print req_str
 			return HttpResponse(req_str)
-	return HttpResponse("<script>alert('User not connected');window.location='/dashboard/dash';</script>")
+	return HttpResponse("<script>alert('User not connected');window.location='/dashboard/users';</script>")
 
 def show_usage(request):
 	try:
 		ip = request.GET['ip']
 	except KeyError:
-		return HttpResponse("<script>alert('IP not passed');window.location='/dashboard/dash';</script>")
+		return HttpResponse("<script>alert('IP not passed');window.location='/dashboard/users';</script>")
 	COMMAND = 'ndsctl status'
 	ssh = subprocess.Popen(["ssh","root@192.168.1.1",COMMAND],
 		shell=False,
@@ -96,9 +103,9 @@ def show_usage(request):
 			index = result.index(a)
 			info = result[index+7].split('\n')
 			state = info[0]
-			req_str = "<script>alert('%s');window.location='/dashboard/dash';</script>" %state
+			req_str = "<script>alert('%s');window.location='/dashboard/users';</script>" %state
 			print req_str
 			return HttpResponse(req_str)
-	return HttpResponse("<script>alert('User not connected');window.location='/dashboard/dash';</script>")
+	return HttpResponse("<script>alert('User not connected');window.location='/dashboard/users';</script>")
 
 	

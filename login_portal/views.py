@@ -52,6 +52,7 @@ class login_portal(object):
 						stdout=subprocess.PIPE,
 						stderr=subprocess.PIPE)
 					result = ssh.stdout.readlines()
+					print result
 					resp_str = '<script>alert("You are authenticated");window.location="http://www.google.com";</script>'
 					return HttpResponse(resp_str)
 				else:
@@ -152,27 +153,21 @@ def database(request):
 	flag = 1
 	count = 1
 	print result
-	try:
-		for a in result:
-			temp = a
-			print temp
-			try:
-				mob = temp["number"]
-			except TypeError:
-				print "there is a keyerror"
-				mob = "91XXXXXXXXXX"
-			if mob == number:
-				print "match found"
-				result = database_var.put('/registered',count,{'ip':ip,'number':number,'time':time,'date':date,'datetimeobject':now})
-				flag = 0
+	if result==None:
+		database_var.put('/registered',1,{"number":number,"ip":ip,"time":time,"date":date,"datetime":now})
+		i = 2
+	else:
+		for x in result:
+			if x==None:
+				continue
+			if x['number']==number and x['ip']==ip:
+				result = database_var.put('/registered',count,{"number":number,"ip":ip,"time":time,"date":date,"datetime":now})
 				count = count + 1
-	except TypeError:
-		print "there is a TypeError"
-		pass
-	if flag:
-		print "no match found"
-		result = database_var.put('/registered',i,{'ip':ip,'number':number,'time':time,'date':date,'datetimeobject':now})
-		i = i+1
+				flag = 0
+				break
+			count = count + 1
+		if flag:
+			result = database_var.put('/registered',count,{"number":number,"ip":ip,"time":time,"date":date,"datetime":now})
 
 
 def wrongotp(request):

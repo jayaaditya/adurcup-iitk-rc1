@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Adurcup- Social WiFi</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/static/css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<link rel="icon" href="/static/images/wifi.PNG">
+</head>
+
+
+<!-- Changes to be made-
+    1. Add the script snippet at the bottom of this page.
+    2. Search for div class="huge" and add then replace that whole line
+    3. Delete- Ask me
+    4. Add jumbotron
+
+-->
+
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                      <a class="navbar-brand" href="http://www.adurcup.com"><img src="/static/images/AdUrCupLogo.png" height="20px" alt="Adurcup Logo"></a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-refresh"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                        <li>
+                            <a href="/dashboard/reboot/">Reboot Router</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i> Restaurant Name <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <!--<li>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        
+                        <li class="divider"></li>-->
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="active">
+                        <a href="/dashboard/dash"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Analytics</a>
+                    </li>
+                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-table"></i> User Log <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="/dashboard/users">All Users</a>
+                            </li>
+                            <li>
+                                <a href="#">Active Users</a>
+                            </li>
+			                 <li>
+                                <a href="#">Inactive Users</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-edit"></i> Customise WiFi Sign In Page</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-ban"></i> Blacklist</a>
+                    </li>
+                    <li>
+                        <a href="http://www.adurcup.com/contact" target="_blank"><i class="fa fa-fw fa-phone"></i> Contact Us</a>
+                    </li>
+                   
+                    <li>
+                        <a href="http://www.adurcup.com/" target="_blank"><i class="fa fa-fw fa-info"></i> Adurcup.com</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Dashboard <small>Statistics Overview</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Dashboard
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-mobile fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge" id="con_usr">X</div>
+                                        <div>Connected Devices</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" data-toggle="tooltip" title="The number of devices connected to OpenWrt">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge" id="all_usr">X</div>
+                                        <div>Total Connections Established</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" data-toggle="tooltip" title="Total authentications made during this session">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-download fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge" id="down_data">X</div>
+                                        <div>Total Data Downloaded (in KBs)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" data-toggle="tooltip" title="Total data downloaded in this session">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-dashboard fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge" id="down_speed">X</div>
+                                        <div>Average Download Speed (in KBps)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" data-toggle="tooltip" title="Average download speed in this session">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-sm-3 col-sm-offset-3">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Total Data Uploaded: (in KBs)</h3>
+                            </div>
+                            <div class="panel-body" id="up_data">
+                                x
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Average Upload Speed: (in KBps)</h3>
+                            </div>
+                            <div class="panel-body" id="up_speed">
+                                x
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="jumbotron">
+                    <h2>Adurcup Social Wi-Fi</h1>
+                    <p>Adurcup, aims to be the one stop solution for all major restaurant needs. Taking small and appropriate steps in this direction, it currently provide services in three major areas namely: Pest Control, Disposables and Social wifi. 
+Adurcup also aims to help restaurants generate an alternate revenue channel through in house advertising. 
+Adurcup helps you to focus on your core competency and outsource every other things to it.
+You do what you do best, and leave the rest on us.
+                    </p>
+                    <p><a href="https://www.facebook.com/Adurcup-1532526223686913/" class="btn btn-primary btn-lg" role="button" target="_blank">Connect via Facebook &raquo;</a>
+                    </p>
+                </div>
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        
+
+
+    
+
+    <!-- jQuery -->
+    <script src="/static/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/static/js/plugins/morris/raphael.min.js"></script>
+    <script src="/static/js/plugins/morris/morris.min.js"></script>
+    <!--<script src="js/plugins/morris/morris-data.js"></script>-->
+
+
+    <!--SCRIPT SNIPPET-->
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        var url = "https://project-9184156655217525389.firebaseio.com/general.json?auth=APppxbcx9R3uVVPEMsuzXOsO3Kdjo8MbGHWvfrQ8";
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                myFunction(xmlhttp.responseText);
+            }
+        }
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+
+        function myFunction(response) {
+            var arr = JSON.parse(response);
+            document.getElementById("all_usr").innerHTML = arr[1].all_users; 
+            document.getElementById("con_usr").innerHTML = arr[1].connected_users;
+            document.getElementById("down_data").innerHTML = arr[1].download_data;
+            document.getElementById("down_speed").innerHTML = arr[1].download_speed;
+            document.getElementById("up_data").innerHTML = arr[1].upload_data;
+            document.getElementById("up_speed").innerHTML = arr[1].upload_speed;
+        }
+    </script>
+    <!--/SCRIPT SNIPPET-->
+    
+    <div id="myfirstchart" style="height: 250px;"></div>
+    <p id="id011"></p>
+    <script>
+        var arr1=[];
+        var array1=[]; 
+        var dat;
+        var xmlhttp2 = new XMLHttpRequest();
+        var url = "https://project-9184156655217525389.firebaseio.com/usage-history.json?auth=APppxbcx9R3uVVPEMsuzXOsO3Kdjo8MbGHWvfrQ8";
+        xmlhttp2.onreadystatechange=function() {
+            if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
+                myFunction2(xmlhttp2.responseText);
+                  new Morris.Bar({
+      // ID of the element in which to draw the chart.
+      element: 'myfirstchart',
+      // Chart data records -- each entry in this array corresponds to a point on
+      // the chart.
+      data: array1,
+      // The name of the data record attribute that contains x-values.
+      xkey: 'year',
+      // A list of names of data record attributes that contain y-values.
+      ykeys: ['value'],
+      // Labels for the ykeys -- will be displayed when you hover over the
+      // chart.
+      labels: ['Value']
+    });
+            }
+        }
+        xmlhttp2.open("GET", url, true);
+        xmlhttp2.send();
+
+
+        function myFunction2(response) {
+            arr1 = JSON.parse(response);
+            var i;
+        
+            for(i=1;i<arr1.length; i++) {
+                dat = {
+                    year : arr1[i].datetime,
+                    value : arr1[i].connected_users
+                }
+                array1.push(dat);
+            }
+        }
+
+    </script>
+
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+</body>
+
+</html>
