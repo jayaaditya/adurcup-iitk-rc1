@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Authenticated</title>
+</head>
+<body>
+	<form action="http://192.168.1.1:2050/nodogsplash_auth/" method="GET">
+		<input type="hidden" name="redir" label = "redir" value="{{ form.redir }}">
+		<input type="hidden" name="tok" label = "tok" value="{{ form.tok }}">
+		<input type="submit" value="Enter">
+	</form>
+
+</body>
+</html>
