@@ -38,7 +38,7 @@ class login_portal(object):
 				code = form.cleaned_data['otp']
 				print code
 				#connection = httplib.HTTPConnection("enterprise.smsgupshup.com")
-				req_str = "http://enterprise.smsgupshup.com/apps/TwoFactorAuth/incoming.php?phone=%s&key=cbff58cd05e9b29c4ee5628a0c5e7f9a&code=%s" %(number,code)
+				req_str = "http://enterprise.smsgupshup.com/apps/TwoFactorAuth/incoming.php?phone=%s&key=xxxxxxxxxxxxx&code=%s" %(number,code)
 				html = urllib2.urlopen(req_str).read()
 				soup = BeautifulSoup(html)
 				otp_response = soup.get_text()
@@ -82,7 +82,7 @@ class login_portal(object):
 				number = no[ip]
 				print ('%r' %number)
 				connection = httplib.HTTPConnection("enterprise.smsgupshup.com")
-				req_str = "/apps/TwoFactorAuth/incoming.php?phone=%s&key=8e8d1a29a862c57b3ac2b795cd0de229" %(number)
+				req_str = "/apps/TwoFactorAuth/incoming.php?phone=%s&key=xxxxxxxxxxx" %(number)
 				print req_str
 				connection.request("HEAD",req_str)
 				res = connection.getresponse()
